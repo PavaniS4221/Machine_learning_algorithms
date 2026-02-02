@@ -1,0 +1,111 @@
+
+
+## 📌 Math Behind One-Hot Encoding
+
+One-Hot Encoding is a technique used to convert categorical variables into numerical form so that machine learning models can process them without introducing false relationships between categories.
+
+Let a categorical variable **X** have **k distinct categories**:
+
+[
+X \in {c_1, c_2, \dots, c_k}
+]
+
+One-Hot Encoding defines a mapping:
+
+[
+f: X \rightarrow \mathbb{R}^k
+]
+
+Each category (c_i) is mapped to a **k-dimensional binary vector** called a **standard basis vector**:
+
+[
+f(c_i) = \mathbf{e}_i = (0, 0, \dots, 1, \dots, 0)
+]
+
+where only the (i^{th}) position is 1 and all others are 0.
+
+---
+
+### 🔹 Example
+
+If:
+
+[
+Color \in {Red, Green, Blue}
+]
+
+Then the one-hot encodings are:
+
+* Red → (1, 0, 0)
+* Green → (0, 1, 0)
+* Blue → (0, 0, 1)
+
+---
+
+### 🔹 Geometric Interpretation
+
+Each one-hot vector lies along a unique axis in a k-dimensional space.
+
+For any two different categories (i \neq j):
+
+[
+\mathbf{e}_i \cdot \mathbf{e}_j = 0
+]
+
+This means the vectors are **orthogonal**, ensuring:
+
+* No ordering between categories
+* Equal distance between all categories
+
+The Euclidean distance between any two categories is:
+
+[
+|\mathbf{e}_i - \mathbf{e}_j| = \sqrt{2}
+]
+
+---
+
+### 🔹 Why One-Hot Encoding is Needed
+
+Label encoding assigns arbitrary numerical order (e.g., Red = 0, Green = 1, Blue = 2), which introduces a **false ordinal relationship**.
+One-Hot Encoding avoids this by representing each category independently.
+
+---
+
+### 🔹 Effect on Linear Models
+
+In linear and logistic regression models:
+
+[
+y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \dots + \beta_kx_k
+]
+
+Each one-hot feature has its own coefficient, allowing the model to learn the **independent contribution** of each category.
+
+---
+
+### 🔹 Dummy Variable Trap
+
+If all k one-hot columns are used:
+
+[
+x_1 + x_2 + \dots + x_k = 1
+]
+
+This causes **perfect multicollinearity**.
+To avoid this, one column is dropped, leaving **k−1 features**, and the dropped category becomes the **baseline**.
+
+---
+
+### 🔹 Key Advantages
+
+* Prevents false ordering of categories
+* Treats all categories equally
+* Works well with linear and distance-based models
+
+### 🔹 Limitation
+
+* Increases dimensionality when categories are many
+
+---
+
