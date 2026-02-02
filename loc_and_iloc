@@ -1,0 +1,54 @@
+# Pandas: loc vs iloc
+
+In **Pandas**, `loc` and `iloc` are used for **selecting rows and columns** from a DataFrame, but they work differently.
+
+---
+
+## 1. `loc` (Label-based Indexing)
+
+- Access rows and columns **by label** (row/column names)
+- Can accept:
+  - Single label
+  - List of labels
+  - Slice of labels
+  - Boolean mask
+
+### Syntax
+
+```python
+df.loc[row_labels, column_labels]
+import pandas as pd
+
+data = {'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, 30, 35],
+        'City': ['NY', 'LA', 'SF']}
+
+df = pd.DataFrame(data, index=['a', 'b', 'c'])
+
+# Single row by label
+df.loc['a']
+
+# Multiple rows by label
+df.loc[['a', 'c']]
+
+# Row + specific column
+df.loc['b', 'Age']
+
+# Slice of rows and columns
+df.loc['a':'b', 'Name':'Age']
+
+# Boolean selection
+df.loc[df['Age'] > 28]
+
+# Single row by integer position
+df.iloc[0]
+
+# Multiple rows
+df.iloc[[0, 2]]
+
+# Row + column
+df.iloc[1, 1]  # row 1, column 1 → Age of Bob
+
+# Slice rows and columns
+df.iloc[0:2, 0:2]  # first 2 rows, first 2 columns
+
